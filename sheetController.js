@@ -22,6 +22,7 @@ export async function getWebsitesFinished() {
     for(let i = 0; i < doc.sheetCount; i++) {
         const sheet = doc.sheetsByIndex[i];
         const rows = await sheet.getRows();
+        console.log( rows[0].get('Websites Finished'), rows[0].get('Last Updated'))
         data.push({
             "websitesFinished": rows[0].get('Websites Finished'),
             "lastUpdated": rows[0].get('Last Updated'),
