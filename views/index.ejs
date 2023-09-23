@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="htmx.min.js"></script>
+        <script src="cdn.tailwindcss.com_3.3.3.js"></script>
+
+    </head>
+    <body>
+        <div class="container mx-auto px-6 py-6">
+            <h1 class="text-2xl">Large-Scale Accessibility Evalution Progress</h1>
+            <!-- All you have to do is include the reload script and have it be on every page of your project -->
+            <!-- You do not create this route, reload creates it for you automatically -->
+            <div class="grid grid-cols-[30px_repeat(auto-fill,_30px)] gap-1 p-4" hx-get="/websitesFinished" hx-target="this" hx-trigger="revealed">
+            </div>
+        </div>
+        <script src="/reload/reload.js"></script>
+    </body>
+</html>

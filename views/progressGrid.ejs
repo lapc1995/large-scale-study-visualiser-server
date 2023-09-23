@@ -1,0 +1,7 @@
+<% for(var i =0; i < finishedCounters; i++) { %>
+    <%- include('includes/countElementDone') %>
+<% } %>
+<%- include('includes/countElementInProgress') %>
+<% for(var i=0; i < unfinishedCounters-1; i++) { %>
+    <%- include('includes/countElementWaiting') %>
+<% } %>
