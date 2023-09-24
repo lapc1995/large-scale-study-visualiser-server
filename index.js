@@ -39,6 +39,7 @@ async function getWebsitesFinished() {
 
     let websitesFinished = 0;
     for(let i = 0; i < cache.data.length; i++) {
+        console.log(cache.data[i].websitesFinished)
         websitesFinished += parseInt(cache.data[i].websitesFinished);
     }
     return websitesFinished;
