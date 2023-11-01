@@ -1,0 +1,5 @@
+<div class="grid grid-cols-[400px_repeat(auto-fill,_400px)] gap-1 p-4 justify-evenly">
+    <% for(let data of crawlerData) { %>
+        <%- include('includes/crawlerElement', {data: data}); %>
+    <% } %>
+</div>

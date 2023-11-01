@@ -26,9 +26,13 @@ app.get('/websitesFinished', async (req, res, next) => {
     const websitesFinished = await getWebsitesFinished();
     const finishedCounters = Math.floor((websitesFinished * process.env.TOTAL_NUMBER_OF_COUNTERS) / process.env.TOTAL_NUMBER_OF_WEBSITES);
     const unfinishedCounters = process.env.TOTAL_NUMBER_OF_COUNTERS - finishedCounters;
-    console.log(finishedCounters, unfinishedCounters)
-    console.log('websitesFinished');
     return res.render('progressGrid', { finishedCounters, unfinishedCounters });
+});
+
+app.get('/crawlerData', async (req, res, next) => {
+    const crawlerData = await getCrawlerData();
+    console.log('crawlerData');
+    return res.render('crawlerGrid', { crawlerData });
 });
 
 async function getWebsitesFinished() {
@@ -38,11 +42,32 @@ async function getWebsitesFinished() {
     }
 
     let websitesFinished = 0;
-    console.log(cache.data)
     for(let key in cache.data) {
         websitesFinished += parseInt(cache.data[key].websitesFinished);
     }
     return websitesFinished;
+}
+
+async function getCrawlerData() {
+    if(!cache.data) {
+        let data = await sheetController.getWebsitesFinished();
+        cache.setData(data);
+    }
+    
+    let data = [];
+    for(let key in cache.data) {
+        data.push({
+            "key": key,
+            "websitesFinished": cache.data[key].websitesFinished,
+            "lastUpdated": cache.data[key].lastUpdated,
+        });
+    }
+
+    let sortedData = data.sort((a, b) => {
+        return a.key - b.key;
+    });
+    
+    return data;
 }
 
 /*
